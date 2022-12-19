@@ -1,0 +1,225 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "User",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1478241800 { 
+   	label=Librarian
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Librarian1478241800[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Librarian</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   in: Scanner [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addEBookToMemberAccount(b: Book, m: Member)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ chargeMemberLateFee(m: Member)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ creatMemberAccount(members: ArrayList&lt;Member&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sendMessage(m: Message)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1675388953 { 
+   	label=Message
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Message1675388953[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Message</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   body: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   header: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   in: Scanner [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ clearInbox(u: User, inbox: ArrayList&lt;Message&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteMessage(u: User, m: Message)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sendMsgToAllMembers(allMembers: ArrayList&lt;Member&gt;, lib: Librarian, msg: Message): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1993902406 { 
+   	label=Member
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Member1993902406[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Member</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   booksCheckedOut: ArrayList&lt;Book&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   feeBalance: Double [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   name: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ checkIn(b: Book)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ checkOut(b: Book, m: Member): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ payFees(m: Member)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ selectElectronicBook(m: Member)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sendMessage(m: Message)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2076425 { 
+   	label=Book
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Book2076425[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Book</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   author: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   copies: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   electronicCopy: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   title: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addBook(lib: Librarian, bookDatabase: ArrayList&lt;Book&gt;, newBook: Book, allMembers: ArrayList&lt;Member&gt;): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ checkElectronic()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeBook(lib: Librarian, b: Book, bookDatabase: ArrayList&lt;Book&gt;)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2645995 { 
+   	label=User
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   User2645995[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)User</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   inbox: ArrayList&lt;Message&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userID: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ searchDatabase(bookDatabase: ArrayList&lt;Book&gt;, searchedBook: Book): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sendMessage(m: Message)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ verifyUser(userID: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ viewLibraryBookDatabase(bookDatabase: ArrayList&lt;Book&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ viewMessages(userID: String, inbox: ArrayList&lt;Message&gt;)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Book2076425 -> Librarian1478241800[label="removeBook() -> sendMessage()"];
+Book2076425 -> Message1675388953[label="addBook() -> sendMsgToAllMembers()"];
+Member1993902406 -> Book2076425[label="booksCheckedOut
+[0..*]"];
+User2645995 -> Librarian1478241800[arrowhead=none, arrowtail=empty, dir=both];
+User2645995 -> Member1993902406[arrowhead=none, arrowtail=empty, dir=both];
+User2645995 -> Message1675388953[label="inbox
+[0..*]"];
+    
+}
+@enduml

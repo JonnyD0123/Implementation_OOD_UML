@@ -1,0 +1,82 @@
+@startuml
+class Book {
+- String title
+- String author
+- Integer copies
+- boolean electronicCopy
++ String getTitle()
++ void setTitle(String)
++ String getAuthor()
++ void setAuthor(String)
++ Integer getCopies()
++ void setCopies(Integer)
++ boolean isElectronicCopy()
++ void setElectronicCopy(boolean)
++ void checkElectronic()
++ void removeBook(Librarian,Book,ArrayList<Book>)
++ String addBook(Librarian,ArrayList<Book>,Book,ArrayList<Member>)
++ String toString()
+}
+abstract class User {
+- String userID
+- ArrayList<Message> inbox
++ void verifyUser(String)
++ ArrayList<Message> getInbox()
++ void setInbox(ArrayList<Message>)
++ void viewMessages(String,ArrayList<Message>)
++ String getUserID()
++ void setUserID(String)
++ {abstract}void sendMessage(Message)
++ void viewLibraryBookDatabase(ArrayList<Book>)
++ String searchDatabase(ArrayList<Book>,Book)
+}
+class JunitTest {
++ void testBookAddBook()
++ void testMessageSendMsgToAllUsers()
++ void testLibrarianLateFeeCharge()
++ void testUserDBsearch()
++ void testMemberCheckOutwithFee()
+}
+class Librarian {
++ Scanner in
++ void sendMessage(Message)
++ void addEBookToMemberAccount(Book,Member)
++ void creatMemberAccount(ArrayList<Member>)
++ void chargeMemberLateFee(Member)
+}
+class Message {
+- String header
+- String body
++ Scanner in
++ String getHeader()
++ void setHeader(String)
++ String getBody()
++ void setBody(String)
++ void deleteMessage(User,Message)
++ void clearInbox(User,ArrayList<Message>)
++ String sendMsgToAllMembers(ArrayList<Member>,Librarian,Message)
+}
+class Main {
++ {static} void main(String[])
+}
+class Member {
+- String name
+- Double feeBalance
+- ArrayList<Book> booksCheckedOut
++ ArrayList<Book> getBooksCheckedOut()
++ void setBooksCheckedOut(ArrayList<Book>)
++ String getName()
++ void setName(String)
++ Double getFeeBalance()
++ void setFeeBalance(Double)
++ void payFees(Member)
++ void sendMessage(Message)
++ void selectElectronicBook(Member)
++ void checkIn(Book)
++ String checkOut(Book,Member)
+}
+
+
+User <|-- Librarian
+User <|-- Member
+@enduml
